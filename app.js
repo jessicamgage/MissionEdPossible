@@ -16,12 +16,14 @@ app.use(methodOverride());
 mongoose.connect('mongodb://localhost:27017/database');
 
 restify.serve(router, mongoose.model('SiteInfo', new mongoose.Schema ({
-    GroupNum: {type: int, required: true},
-    CategoryNum: {type: int, required: true},
     Group: {type: String, required: true},
     FoodCategory: {type: Array, required: true},
-    FNDDS_code: {type: int, required: true},
     FoodDescription: {type: Array, required: true}
+})))
+
+restify.serve(router, mongoose.model('LikeOrDislike', new mongoose.Schema({
+    TriedFood: {type: Boolean, required: true},
+    LikeFood: {type: Boolean, required: true}
 })))
 
 app.use(router);
@@ -37,18 +39,10 @@ request.get({
     qs: {
         query: JSON.stringify({
             $and: [{
-                name: '~Group no.'
-            }, {
-                name: '~Category no.'
-            }
-            , {
                 name: '~Group'
             }
             , {
                 name: '~Food Category'
-            }
-            , {
-                name: '~FNDDS code'
             }
             , {
                 name: '~Food description'
