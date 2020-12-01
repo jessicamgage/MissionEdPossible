@@ -13,8 +13,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chai": "^4.2.0",
     "express-restify-mongoose": "^5.0.0",
     "method-override": "^3.0.0",
+    "mocha": "^8.2.1",
     "mongodb": "^3.6.3",
     "mongoose": "^4.0.0",
     "node.js": "0.0.1-security",
