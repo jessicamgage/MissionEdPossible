@@ -18,11 +18,11 @@ describe("#request", function () {
             url: 'http://www.dnd5eapi.co/api/monsters/goblin',
             qs: {
                 query: JSON.stringify ({
-                    index: "~goblin"
+                    "index": "goblin"
                 })
             }
         }
-       )).to.equal(
+       )).to.eql(
         "goblin"
        ) 
     })
