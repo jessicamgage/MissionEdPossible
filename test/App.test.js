@@ -1,5 +1,5 @@
 const express = require('express');
-const request = require('request');
+const request = require('request-promise');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 
@@ -11,19 +11,12 @@ const appTest = express();
 appTest.use(bodyParser.json());
 appTest.use(methodOverride());
 
-describe("#request", function () {
-    it("pulls data from a GET request to parse the info to usable data",
-    function () {
-       expect(request.get({
-            url: 'http://www.dnd5eapi.co/api/monsters/goblin',
-            qs: {
-                query: JSON.stringify ({
-                    "index": "goblin"
-                })
-            }
-        }
-       )).to.eql(
-        "goblin"
-       ) 
+describe("#request", async function () {
+    it("pulls data from GET request to parse info to usable data",
+    async function () {
+        console.log(await request.get({url: 'http://www.dnd5eapi.co/api/monsters/goblin'}));
+        const response = await request.get({url: 'http://www.dnd5eapi.co/api/monsters/goblin' , json: true});
+
+        expect(response.index).to.eql("goblin");
     })
 })
