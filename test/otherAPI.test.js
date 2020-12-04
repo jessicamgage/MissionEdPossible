@@ -6,7 +6,8 @@ var app = require('../app.js');
 var expect = require('chai').expect;
 chai.use(chaiHttp);
 
-describe("#request", async function () {
+
+describe.skip("#request", async function () {
     it("pulls data from GET request to parse info to usable data",
     async function () {
         const response = await request.get({url: 'http://www.dnd5eapi.co/api/monsters/goblin' , json: true});
@@ -15,7 +16,7 @@ describe("#request", async function () {
     })
 })
 
-describe("#request", async function () {
+describe.skip("#request", async function () {
     it("pulls data from multiple GET requests",
     async function () {
         const response = await request.get({url: 'http://www.dnd5eapi.co/api/monsters/adult-black-dragon', json: true});

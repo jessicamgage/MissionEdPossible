@@ -4,17 +4,17 @@ const timestamp = require('mongoose-timestamp');
 const ClientSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true,
-        trim: true
+        // required: true,
+        // trim: true
     },
     email: {
         type: String,
-        required: true,
-        trim: true
+        // required: true,
+        // trim: true
     }
 });
 
-ClientSchema.plugin(timestamp);
+//ClientSchema.plugin(timestamp);
 
-const Client = mongoose.model('Client', ClientSchema);
+const Client = mongoose.model('clients', ClientSchema);
 module.exports = Client;
