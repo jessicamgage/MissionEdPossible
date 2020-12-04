@@ -1,54 +1,24 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const methodOverride = require('method-override');
+const restify = require('restify');
 const mongoose = require('mongoose');
-const restify = require('express-restify-mongoose');
-const request = require('request');
+const config = require('./config');
 
-const app = express();
-const router = express.Router();
+const server = restify.createServer();
 
-app.use(bodyParser.json());
-app.use(methodOverride());
+//Middleware
 
-//Dependencies and middleware required for express-restify-mongoose ^
+server.use(restify.plugins.bodyParser());
 
-mongoose.connect('mongodb://localhost:27017/database');
-
-restify.serve(router, mongoose.model('SiteInfo', new mongoose.Schema ({
-    Group: {type: String, required: true},
-    FoodCategory: {type: Array, required: true},
-    FoodDescription: {type: Array, required: true}
-})))
-
-restify.serve(router, mongoose.model('LikeOrDislike', new mongoose.Schema({
-    TriedFood: {type: Boolean, required: true},
-    LikeFood: {type: Boolean, required: true}
-})))
-
-app.use(router);
-
-app.listen(3000, () => {
-    console.log('Express server listening on port 3000')
+server.listen(config.PORT, () => {
+    mongoose.connect(config.MONGODB_URI, 
+        { useNewUrlParser: true, useUnifiedTopology: true } 
+    );
 });
 
-//Automatically generates CRUD requests for the schema data
+const db = mongoose.connection;
 
-request.get({
-    url: 'https://www.cdc.gov/mmwr/preview/mmwrhtml/mm6105-table.htm',
-    qs: {
-        query: JSON.stringify({
-            $and: [{
-                name: '~Group'
-            }
-            , {
-                name: '~Food Category'
-            }
-            , {
-                name: '~Food description'
-            }]
-        })
-    }
-})
+db.on('error', (err) => console.log(err));
 
-//how to use a GET request to download information off a site.
+db.once('open', () => {
+    require('./routes/crud')(server);
+    console.log(`server started on port ${config.PORT}`);
+});
