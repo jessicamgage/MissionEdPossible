@@ -1,15 +1,10 @@
-const express = require('express');
 const request = require('request-promise');
-const bodyParser = require('body-parser');
-const methodOverride = require('method-override');
+const chai = require('chai');
+const chaiHttp = require('chai-http');
 
 var app = require('../app.js');
 var expect = require('chai').expect;
-
-const appTest = express();
-
-appTest.use(bodyParser.json());
-appTest.use(methodOverride());
+chai.use(chaiHttp);
 
 describe("#request", async function () {
     it("pulls data from GET request to parse info to usable data",
@@ -31,9 +26,11 @@ describe("#request", async function () {
     })
 })
 
-describe("#request", async function () {
-    it("pulls information from CDC site for testing of food schema",
-    async function (){
-        const response = await request.get({url: '', json: true });
-    })
-})
+// // describe("#request", async function () {
+// //     it("pulls information from CDC site for testing of food schema",
+// //     async function (){
+// //         const response = await request.get(
+// //             {url: 'https://www.cdc.gov/mmwr/preview/mmwrhtml/mm6105-table.htm', 
+// //             json: true });
+// //     })
+// // })

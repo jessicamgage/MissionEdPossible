@@ -22,3 +22,5 @@ db.once('open', () => {
     require('./routes/crud')(server);
     console.log(`server started on port ${config.PORT}`);
 });
+
+module.exports = server
