@@ -1,6 +1,6 @@
 const express = require('express');
 const restify = require('express-restify-mongoose');
-const clientModel = require("./models/Client");
+const clientModel = require("./models/Clients");
 const bodyParser = require('body-parser');
 const router = express.Router();
 const mongoose = require('mongoose');

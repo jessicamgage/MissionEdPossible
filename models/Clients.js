@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const timestamp = require('mongoose-timestamp');
 
-const ClientSchema = new mongoose.Schema({
+const ClientsSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -14,7 +14,7 @@ const ClientSchema = new mongoose.Schema({
     }
 });
 
-ClientSchema.plugin(timestamp);
+ClientsSchema.plugin(timestamp);
 
-const Client = mongoose.model('Client', ClientSchema);
-module.exports = Client;
+const Clients = mongoose.model('Clients', ClientsSchema);
+module.exports = Clients;
