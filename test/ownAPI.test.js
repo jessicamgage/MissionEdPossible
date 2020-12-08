@@ -12,22 +12,30 @@ describe("#request", async function () {
         const response = await request.get({url: 'http://localhost:8000/api/v1/client', 
             json: true});
 
-        console.log(response);
-
         expect(response).to.eql([]);
     })
 })
 
 describe("#request", async function () {
-    it("uses mocking to set up an instance of API, pushes data to it, then tears it down after completion",
+    it("tests response code to ensure a valid post request is made",
     async function () {
-        //helper function to set up 
+        var data = {
+            "name" : "Ed",
+            "email" : "b@b.com"
+        }
 
-        //post request to []
+        const push = await request({
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            uri: 'http://localhost:8000/api/v1/client',
+            body: JSON.stringify(data),
+            method: 'POST'
+        });
 
-        const response = await request.get({url: 'http://localhost:8000/api/v1/client',
-            json: true});
+        thisID = push._id;
+        const response = await request.get({url: 'http://localhost:8000/api/v1/client/' + thisID, json: true});
 
-        //helper function to tear down
+        expect(response.email).to.eql('b@b.com');
     })
 })
