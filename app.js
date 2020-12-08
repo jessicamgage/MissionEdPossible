@@ -1,6 +1,8 @@
 const express = require('express');
 const restify = require('express-restify-mongoose');
 const clientModel = require("./models/Clients");
+const foodModel = require("./models/Foods");
+
 const bodyParser = require('body-parser');
 const router = express.Router();
 const mongoose = require('mongoose');
@@ -24,6 +26,7 @@ db.on('error', (err) => console.log(err));
 
 db.once('open', () => {
     restify.serve(router, clientModel);
+    restify.serve(router, foodModel);
     app.use(router);
 
     console.log(`server started on port ${config.PORT}`);
