@@ -27,6 +27,10 @@ with open('./input.tsv', 'r') as file_input:
             file_dict["category"] = category
             file_dict["description"] = description
 
+            for key in file_dict.keys():
+                file_dict[key] = file_dict[key].replace('\n', '')
+                file_dict[key] = file_dict[key].replace('\\n', '')
+
             json.dump(file_dict, file_output, sort_keys=False)
 
             file_output.write(",")
