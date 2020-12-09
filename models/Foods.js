@@ -2,16 +2,13 @@ const mongoose = require('mongoose');
 
 const FoodsScehma = new mongoose.Schema({
     group: {
-        type: String,
-        required: true
+        type: String
     },
     category: {
-        type: String,
-        required: true
+        type: String
     },
     description: {
-        type: String,
-        required: true
+        type: String
     }
 });
 

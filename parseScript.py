@@ -23,9 +23,9 @@ with open('./input.tsv', 'r') as file_input:
             category = fields[3]
             description = fields[5]
 
-            file_dict[group] = group
-            file_dict[category] = category
-            file_dict[description] = description
+            file_dict["group"] = group
+            file_dict["category"] = category
+            file_dict["description"] = description
 
             json.dump(file_dict, file_output, sort_keys=False)
 
